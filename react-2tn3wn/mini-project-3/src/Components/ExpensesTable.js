@@ -4,18 +4,28 @@ import { Table, Button, ButtonToolbar } from 'react-bootstrap';
 class ExpenseForm extends Component {
   constructor() {
     super();
+    this.state = {sortBy: ''};
   }
 
   render() {
+    const exp = this.props.expenses;
+    if (this.state.sortBy !== '') {
+      exp.sort((a,b) => {
+        return a[this.state.sortBy] > b
+        [this.state.sortBy] ? 1 : -1;
+      });
+    }
+
     return (
       <Table striped bordered hover variant="dark" className="mt-5">
         <thead>
           <tr>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th></th>
+            <th>
+            <Button>
+              variant="secondary"
+              onClick{() => this.setState({ sortBy: 'name' 'amount' 'date' 'date' 'type'})}
+            </Button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +53,14 @@ class ExpenseForm extends Component {
                   >
                     X
                   </Button>
+ 
+                  const filterItem = (expenses) => {
+                    const newItem = Data.filter((expensesFiltered) => {
+                    return expensesFiltered = ExpensesTable; 
+        
+    });
+    setItem(newItem);
+  };
                 </ButtonToolbar>
               </td>
             </tr>

@@ -7,31 +7,25 @@ class ExpenseTracker extends Component {
   constructor() {
     super();
     this.state = {
-      type: '',
-      name: '',
+      type: "",
+      name: "",
       transactionDate: new Date(Date.UTC),
-      amount: '',
+      amount: "",
       editingIndex: -1,
-      expenses: [],
+      expenses: [filterText],
+      expensesFiltered: [],
+
     };
   }
 
   render() {
     const handleChange = (event) => {
       const { name, value } = event.target;
-      //const statusCopy = [...this.state.status]
-      //statusCopy[name] = value
-      //this.setState({status : statusCopy})
       this.setState({ ...this.state, [name]: value });
     };
 
     const handleSubmit = () => {
-      if (
-        this.state.type &&
-        this.state.name &&
-        this.state.transactionDate &&
-        this.state.amount
-      ) {
+      if (this.state.type && this.state.name && this.state.transactionDate && this.state.amount) {
         const addRow = {
           type: this.state.type,
           name: this.state.name,
@@ -47,15 +41,17 @@ class ExpenseTracker extends Component {
         }
 
         this.setState({
-          type: '',
-          name: '',
+          type: "",
+          name: "",
           transactionDate: new Date(Date.UTC),
-          amount: '',
+          amount: "",
           editingIndex: -1,
           expenses: expenses,
         });
       }
     };
+
+    const sortExpenses = (sortType)
 
     const handleDelete = (index) => {
       const expenses = [...this.state.expenses];
@@ -76,8 +72,6 @@ class ExpenseTracker extends Component {
       });
     };
 
-    //console.log(`state->${JSON.stringify(this.state)}`)
-    //console.log(`expenses->${this.state.expenses}`)
     return (
       <Container>
         <ExpenseForm
@@ -89,8 +83,8 @@ class ExpenseTracker extends Component {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-
-        <ExpensesTable
+    
+        <FilterableProductTable
           expenses={this.state.expenses}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
